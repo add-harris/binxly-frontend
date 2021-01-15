@@ -91,3 +91,7 @@ Deploy static contents of dist directory to firebase hosting.
 $ firebase deploy
 ```
 
+### Fix for nav draw!
+
+Add `temporary` prop.
+
