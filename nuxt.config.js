@@ -38,10 +38,36 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
+    '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/firebase',
   ],
+
+  firebase: {
+    config: {
+      apiKey: "AIzaSyCG_jCR7e2CFE4ENztRe956AAsC6ifz1P8",
+      authDomain: "login-app-e5f92.firebaseapp.com",
+      projectId: "login-app-e5f92",
+      storageBucket: "login-app-e5f92.appspot.com",
+      messagingSenderId: "186929363425",
+      appId: "1:186929363425:web:ce5989519888d49b6dbaa0",
+      measurementId: "G-3SP96W2253"
+    },
+    services: {
+      auth: {
+        persistence: 'local', // default
+        initialize: {
+          onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
+          onAuthStateChangedAction: 'onAuthStateChangedAction',
+          subscribeManually: false
+        },
+        ssr: false, // default
+        emulatorPort: 9099,
+        emulatorHost: 'http://localhost',
+      }
+    }
+  },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},

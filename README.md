@@ -11,12 +11,8 @@ npm i --save @nuxtjs/firebase
 
 - Add module & firebase config to `nuxt.config.js`
 
-```js
-  /*
-  ** Nuxt.js modules
-  */
+```json
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/firebase',
@@ -33,7 +29,7 @@ npm i --save @nuxtjs/firebase
       measurementId: "G-3SP96W2253"
     },
     services: {
-      analytics: true
+      auth: true
     }
   },
 ```
