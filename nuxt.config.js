@@ -56,13 +56,13 @@ export default {
     },
     services: {
       auth: {
-        persistence: 'local', // default
+        // ssr: false, // default
+        // persistence: 'local', // default
         initialize: {
-          onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
-          onAuthStateChangedAction: 'onAuthStateChangedAction',
+          // onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
+          // onAuthStateChangedAction: 'onAuthStateChangedAction',
           subscribeManually: false
         },
-        ssr: false, // default
         emulatorPort: 9099,
         emulatorHost: 'http://localhost',
       }
