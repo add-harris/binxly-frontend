@@ -1,12 +1,10 @@
 steps:
-  - name: 'adamharrison/binxly-utils'
+  - name: node
     entrypoint: npm
     args: ['install']
-  - name: 'adamharrison/binxly-utils'
+  - name: node
     entrypoint: npm
     args: ['run', 'generate']
-  - name: 'adamharrison/binxly-utils'
-    entrypoint: firebase
+  - name: adamharrison/firebase-cli
     args: ['deploy', '--project=login-app-e5f92']
-
 
