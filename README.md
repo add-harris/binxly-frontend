@@ -11,7 +11,7 @@ npm i --save @nuxtjs/firebase
 
 - Add module & firebase config to `nuxt.config.js`
 
-```json
+```
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
