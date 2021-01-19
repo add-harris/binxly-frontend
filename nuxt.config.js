@@ -56,8 +56,6 @@ export default {
     },
     services: {
       auth: {
-        // ssr: false, // default
-        // persistence: 'local', // default
         initialize: {
           // onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
           // onAuthStateChangedAction: 'onAuthStateChangedAction',
