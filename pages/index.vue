@@ -1,9 +1,14 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
-      <v-card>
+      <v-card class="mt-6" >
         <v-card-title class="headline">
-          Login
+
+          <v-tabs v-model="tab">
+            <v-tab>Login</v-tab>
+            <v-tab>Sign Up</v-tab>
+          </v-tabs>
+
         </v-card-title>
 
         <v-form
@@ -51,7 +56,8 @@
           >
 
             <v-card-actions>
-              <v-btn color="primary" @click="checkValid">Login</v-btn>
+              <v-btn v-if="tab === 0" color="primary" @click="login">Login</v-btn>
+              <v-btn v-else color="primary" @click="signUp">Sign Up</v-btn>
             </v-card-actions>
 
           </v-row>
@@ -71,6 +77,8 @@ export default {
   },
   data() {
     return {
+
+      tab: null,
 
       email: "",
       password: "",
@@ -93,19 +101,32 @@ export default {
   methods: {
 
     checkValid() {
-      if (this.$refs.form.validate()) {
-        console.log("form is vaild")
-        this.signIn()
-      } else {
-        console.log("form is not vaild")
-      }
+      return this.$refs.form.validate()
     },
 
-    signIn() {
+    login() {
 
       console.log(`email: ${this.email}, password: ${this.password}`)
 
       this.$fireModule.auth().signInWithEmailAndPassword(this.email, this.password)
+        .then((user) => {
+          this.iconColor = "green"
+          this.showIcon = this.successIcon
+          console.log("success")
+        })
+        .catch((error) => {
+          this.iconColor = "red"
+          this.showIcon = this.failIcon
+          console.log("fail")
+        });
+
+    },
+
+    signUp() {
+
+      console.log(`email: ${this.email}, password: ${this.password}`)
+
+      this.$fireModule.auth().createUserWithEmailAndPassword(this.email, this.password)
         .then((user) => {
           this.iconColor = "green"
           this.showIcon = this.successIcon
