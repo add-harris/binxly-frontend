@@ -1,70 +1,80 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
-      <v-card class="mt-6" >
-        <v-card-title class="headline">
 
-          <v-tabs v-model="tab">
-            <v-tab>Login</v-tab>
-            <v-tab>Sign Up</v-tab>
-          </v-tabs>
+      <v-skeleton-loader
+        class="mx-auto"
+        max-width="300"
+        type="card"
+      >
 
-        </v-card-title>
+        <v-card class="mt-6" >
+          <v-card-title class="headline">
 
-        <v-form
-          ref="form"
-          lazy-validation
-        >
+            <v-tabs v-model="tab">
+              <v-tab>Login</v-tab>
+              <v-tab>Sign Up</v-tab>
+            </v-tabs>
 
-          <v-text-field
-            class="pl-10 pr-10"
-            label="email"
-            v-model="email"
-            :rules="emailRules"
-            validate-on-blur
-            required
+          </v-card-title>
+
+          <v-form
+            ref="form"
+            lazy-validation
           >
-            <v-icon
-              :color="iconColor"
-              slot="append"
+
+            <v-text-field
+              class="pl-10 pr-10"
+              label="email"
+              v-model="email"
+              :rules="emailRules"
+              validate-on-blur
+              required
             >
-              {{showIcon}}
-            </v-icon>
-          </v-text-field>
+              <v-icon
+                :color="iconColor"
+                slot="append"
+              >
+                {{showIcon}}
+              </v-icon>
+            </v-text-field>
 
-          <v-text-field
-            class="ml-10 mr-10"
-            type="password"
-            label="password"
-            v-model="password"
-            :rules="passwordRules"
-            validate-on-blur
-            required
-          >
-            <v-icon
-              :color="iconColor"
-              slot="append"
+            <v-text-field
+              class="ml-10 mr-10"
+              type="password"
+              label="password"
+              v-model="password"
+              :rules="passwordRules"
+              validate-on-blur
+              required
             >
-              {{showIcon}}
-            </v-icon>
+              <v-icon
+                :color="iconColor"
+                slot="append"
+              >
+                {{showIcon}}
+              </v-icon>
 
-          </v-text-field>
+            </v-text-field>
 
-          <v-row
-            align="center"
-            justify="space-around"
-          >
+            <v-row
+              align="center"
+              justify="space-around"
+            >
 
-            <v-card-actions>
-              <v-btn v-if="tab === 0" color="primary" @click="login">Login</v-btn>
-              <v-btn v-else color="primary" @click="signUp">Sign Up</v-btn>
-            </v-card-actions>
+              <v-card-actions>
+                <v-btn v-if="tab === 0" color="primary" @click="login">Login</v-btn>
+                <v-btn v-else color="primary" @click="signUp">Sign Up</v-btn>
+              </v-card-actions>
 
-          </v-row>
+            </v-row>
 
-        </v-form>
+          </v-form>
 
-      </v-card>
+        </v-card>
+
+      </v-skeleton-loader>
+
     </v-col>
   </v-row>
 </template>
@@ -98,6 +108,7 @@ export default {
 
     }
   },
+
   methods: {
 
     checkValid() {
