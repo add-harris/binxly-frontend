@@ -1,5 +1,21 @@
 import colors from 'vuetify/es5/util/colors'
 
+function authConfig() {
+
+  let config = {
+    initialize: {
+      subscribeManually: false
+    },
+  }
+
+  if (process.env.EMULATORS === 'true') {
+    config.emulatorPort = 9099
+    config.emulatorHost = 'http://localhost'
+  }
+
+  return config
+}
+
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
@@ -56,15 +72,7 @@ export default {
       measurementId: "G-N7RQMQD21J"
     },
     services: {
-      auth: {
-        initialize: {
-          // onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
-          // onAuthStateChangedAction: 'onAuthStateChangedAction',
-          subscribeManually: false
-        },
-        emulatorPort: 9099,
-        emulatorHost: 'http://localhost',
-      }
+      auth: authConfig()
     }
   },
 

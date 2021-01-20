@@ -1,8 +1,8 @@
 steps:
-  - name: node
+  - name: adamharrison/firebase-cli
     entrypoint: npm
     args: ['install']
-  - name: node
+  - name: adamharrison/firebase-cli
     entrypoint: npm
     args: ['run', 'generate']
   - name: adamharrison/firebase-cli
