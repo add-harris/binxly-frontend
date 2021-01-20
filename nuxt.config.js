@@ -46,13 +46,14 @@ export default {
 
   firebase: {
     config: {
-      apiKey: "AIzaSyCG_jCR7e2CFE4ENztRe956AAsC6ifz1P8",
-      authDomain: "login-app-e5f92.firebaseapp.com",
-      projectId: "login-app-e5f92",
-      storageBucket: "login-app-e5f92.appspot.com",
-      messagingSenderId: "186929363425",
-      appId: "1:186929363425:web:ce5989519888d49b6dbaa0",
-      measurementId: "G-3SP96W2253"
+      apiKey: "AIzaSyAh78iOigjnpDoxE5L9RBB1E_d3RjRI6Sw",
+      authDomain: "fir-static-website-d6299.firebaseapp.com",
+      databaseURL: "https://fir-static-website-d6299.firebaseio.com",
+      projectId: "fir-static-website-d6299",
+      storageBucket: "fir-static-website-d6299.appspot.com",
+      messagingSenderId: "242946123236",
+      appId: "1:242946123236:web:0836f354d78433c4a993f1",
+      measurementId: "G-N7RQMQD21J"
     },
     services: {
       auth: {

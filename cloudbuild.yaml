@@ -6,5 +6,5 @@ steps:
     entrypoint: npm
     args: ['run', 'generate']
   - name: adamharrison/firebase-cli
-    args: ['deploy', '--project=login-app-e5f92']
+    args: ['deploy', '--project=$PROJECT_ID']
 
