@@ -4,7 +4,8 @@ function authConfig() {
 
   let config = {
     initialize: {
-      subscribeManually: false
+      subscribeManually: false,
+      onAuthStateChangedMutation: 'user/ON_AUTH_STATE_CHANGED'
     },
   }
 

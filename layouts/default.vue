@@ -11,6 +11,23 @@
 
       <v-spacer />
 
+      <client-only>
+
+        <div v-if="user">
+          {{user.email}}
+        </div>
+
+      </client-only>
+
+      <client-only>
+
+        <v-btn v-if="user" icon @click="logout">
+          <v-icon>mdi-logout</v-icon>
+        </v-btn>
+
+      </client-only>
+
+
       <v-btn icon>
         <v-icon>mdi-heart</v-icon>
       </v-btn>
@@ -38,11 +55,38 @@
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
+
 export default {
   data () {
     return {
       title: 'binxly.net'
     }
+  },
+
+  computed: {
+
+    ...mapState({
+      user: state => state.user.user
+    })
+
+  },
+
+  methods: {
+
+    logout() {
+
+      this.$fireModule.auth().signOut().then(() => {
+        console.log("signed out")
+        this.$router.push({ path: '/' })
+        this.$router.go(0)
+      }).catch((error) => {
+        console.log("error signing out")
+        // An error happened.
+      });
+    }
+
   }
 }
 </script>

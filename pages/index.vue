@@ -15,6 +15,7 @@
         <v-form
           ref="form"
           lazy-validation
+          v-on:submit.prevent
         >
 
           <v-text-field
@@ -57,8 +58,8 @@
           >
 
             <v-card-actions>
-              <v-btn v-if="tab === 0" color="primary" @click="login">Login</v-btn>
-              <v-btn v-else color="primary" @click="signUp">Sign Up</v-btn>
+              <v-btn v-if="tab === 0" color="primary" type="submit" @click="login">Login</v-btn>
+              <v-btn v-else color="primary" type="submit" @click="signUp">Sign Up</v-btn>
             </v-card-actions>
 
           </v-row>
