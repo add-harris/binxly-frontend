@@ -6,65 +6,10 @@
         <v-card-title class="headline">
 
           <v-tabs v-model="tab">
-            <v-tab>Login</v-tab>
-            <v-tab>Sign Up</v-tab>
+            <v-tab>{{title}}</v-tab>
           </v-tabs>
 
         </v-card-title>
-
-        <v-form
-          ref="form"
-          lazy-validation
-          v-on:submit.prevent
-        >
-
-          <v-text-field
-            class="pl-10 pr-10"
-            label="email"
-            v-model="email"
-            :rules="emailRules"
-            validate-on-blur
-            required
-          >
-            <v-icon
-              :color="iconColor"
-              slot="append"
-            >
-              {{showIcon}}
-            </v-icon>
-          </v-text-field>
-
-          <v-text-field
-            class="ml-10 mr-10"
-            type="password"
-            label="password"
-            v-model="password"
-            :rules="passwordRules"
-            validate-on-blur
-            required
-          >
-            <v-icon
-              :color="iconColor"
-              slot="append"
-            >
-              {{showIcon}}
-            </v-icon>
-
-          </v-text-field>
-
-          <v-row
-            align="center"
-            justify="space-around"
-          >
-
-            <v-card-actions>
-              <v-btn v-if="tab === 0" color="primary" type="submit" @click="login">Login</v-btn>
-              <v-btn v-else color="primary" type="submit" @click="signUp">Sign Up</v-btn>
-            </v-card-actions>
-
-          </v-row>
-
-        </v-form>
 
       </v-card>
 
@@ -74,83 +19,39 @@
 
 <script>
 
-export default {
-  components: {
+import { mapState } from 'vuex'
 
-  },
+export default {
+
+  components: {},
+
   data() {
     return {
-
       tab: null,
-
-      email: "",
-      password: "",
-      showIcon: "",
-      iconColor: "green",
-      successIcon: "mdi-account-check",
-      failIcon: "mdi-account-remove",
-
-      emailRules: [
-        v => !!v || 'email is required',
-        v => /.+@.+/.test(v) || 'email must be valid',
-      ],
-      passwordRules: [
-        v => !!v || 'password is required',
-        v => v.length >= 6 || 'password must be at least 6 characters',
-      ],
-
+      title: "Main Page"
     }
   },
 
-  methods: {
+  computed: {
 
-    checkValid() {
-      return this.$refs.form.validate()
-    },
+    ...mapState({
+      user: state => state.user.user
+    })
 
-    login() {
+  },
 
-      console.log(`email: ${this.email}, password: ${this.password}`)
+  methods: {}
 
-      if (this.checkValid()) {
-
-        this.$fireModule.auth().signInWithEmailAndPassword(this.email, this.password)
-          .then((user) => {
-            this.iconColor = "green"
-            this.showIcon = this.successIcon
-            console.log("success")
-          })
-          .catch((error) => {
-            this.iconColor = "red"
-            this.showIcon = this.failIcon
-            console.log("fail")
-          });
-
-      }
-
-    },
-
-    signUp() {
-
-      console.log(`email: ${this.email}, password: ${this.password}`)
-
-      if(this.checkValid) {
-
-        this.$fireModule.auth().createUserWithEmailAndPassword(this.email, this.password)
-          .then((user) => {
-            this.iconColor = "green"
-            this.showIcon = this.successIcon
-            console.log("success")
-          })
-          .catch((error) => {
-            this.iconColor = "red"
-            this.showIcon = this.failIcon
-            console.log("fail")
-          });
-
-      }
-
-    }
-  }
 }
 </script>
+
+<style>
+
+  .ex-panel-header {
+    color: #737373;
+    font-family: "Roboto", sans-serif;
+    /*transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);*/
+    font-size: 16px;
+  }
+
+</style>
