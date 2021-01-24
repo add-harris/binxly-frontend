@@ -17,8 +17,21 @@
         <v-form
           ref="form"
           lazy-validation
-          v-on:submit.prevent
+          v-on:submit.prevent="checkSubmit"
         >
+
+          <v-alert
+            v-if="showAlert"
+            border="left"
+            color="orange"
+            outlined
+            text
+            dense
+            type="error"
+            class="ma-4"
+          >
+            {{errorMessage}}
+          </v-alert>
 
           <v-text-field
             class="pl-10 pr-10"
@@ -28,12 +41,14 @@
             validate-on-blur
             required
           >
-            <v-icon
-              :color="iconColor"
-              slot="append"
+            <v-icon v-if="email.length != 0"
+                    @click="email = ''"
+                    slot="append"
+                    dense
             >
-              {{showIcon}}
+              mdi-close
             </v-icon>
+
           </v-text-field>
 
           <v-text-field
@@ -45,11 +60,12 @@
             validate-on-blur
             required
           >
-            <v-icon
-              :color="iconColor"
-              slot="append"
+            <v-icon v-if="password.length != 0"
+                    @click="password = ''"
+                    slot="append"
+                    dense
             >
-              {{showIcon}}
+              mdi-close
             </v-icon>
 
           </v-text-field>
@@ -87,10 +103,9 @@ export default {
 
       email: "",
       password: "",
-      showIcon: "",
-      iconColor: "green",
-      successIcon: "mdi-account-check",
-      failIcon: "mdi-account-remove",
+
+      showAlert: false,
+      errorMessage: '',
 
       emailRules: [
         v => !!v || 'email is required',
@@ -110,6 +125,15 @@ export default {
       return this.$refs.form.validate()
     },
 
+    checkSubmit() {
+      if (this.tab === 0) {
+        this.login()
+      }
+      if (this.tab === 1) {
+        this.signUp()
+      }
+    },
+
     login() {
 
       console.log(`email: ${this.email}, password: ${this.password}`)
@@ -118,15 +142,14 @@ export default {
 
         this.$fireModule.auth().signInWithEmailAndPassword(this.email, this.password)
           .then((user) => {
-            this.iconColor = "green"
-            this.showIcon = this.successIcon
             console.log("success")
             this.$router.push({ path: '/' })
           })
           .catch((error) => {
-            this.iconColor = "red"
-            this.showIcon = this.failIcon
             console.log("fail")
+            console.log(error)
+            this.errorMessage = 'Problem logging in, email or password may be incorrect.'
+            this.showAlert = true;
           });
 
       }
@@ -141,15 +164,14 @@ export default {
 
         this.$fireModule.auth().createUserWithEmailAndPassword(this.email, this.password)
           .then((user) => {
-            this.iconColor = "green"
-            this.showIcon = this.successIcon
             console.log("success")
             this.$router.push({ path: '/' })
           })
           .catch((error) => {
-            this.iconColor = "red"
-            this.showIcon = this.failIcon
             console.log("fail")
+            console.log(error)
+            this.errorMessage = 'Problem signing up, account may already exist.'
+            this.showAlert = true;
           });
 
       }
