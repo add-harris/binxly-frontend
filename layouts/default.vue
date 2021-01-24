@@ -79,8 +79,7 @@ export default {
 
       this.$fireModule.auth().signOut().then(() => {
         console.log("signed out")
-        this.$router.push({ path: '/' })
-        this.$router.go(0)
+        this.$router.push({ path: '/login' })
       }).catch((error) => {
         console.log("error signing out")
         // An error happened.

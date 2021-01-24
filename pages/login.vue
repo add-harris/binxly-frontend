@@ -68,46 +68,6 @@
 
         </v-form>
 
-<!--        <v-expansion-panels accordion flat class="pa-2 mt-2">-->
-<!--          <v-expansion-panel>-->
-<!--            <v-expansion-panel-header class="ex-panel-header v-label">Other Methods</v-expansion-panel-header>-->
-<!--            <v-expansion-panel-content>-->
-
-<!--              <v-row-->
-<!--                align="center"-->
-<!--                justify="space-around"-->
-<!--              >-->
-
-<!--                <v-btn icon class="ma-2">-->
-<!--                  <v-icon>-->
-<!--                    mdi-google-->
-<!--                  </v-icon>-->
-<!--                </v-btn>-->
-
-<!--                <v-btn icon class="ma-2">-->
-<!--                  <v-icon>-->
-<!--                    mdi-facebook-->
-<!--                  </v-icon>-->
-<!--                </v-btn>-->
-
-<!--                <v-btn icon class="ma-2">-->
-<!--                  <v-icon>-->
-<!--                    mdi-twitter-->
-<!--                  </v-icon>-->
-<!--                </v-btn>-->
-
-<!--                <v-btn icon class="ma-2">-->
-<!--                  <v-icon>-->
-<!--                    mdi-github-->
-<!--                  </v-icon>-->
-<!--                </v-btn>-->
-
-<!--              </v-row>-->
-
-<!--            </v-expansion-panel-content>-->
-<!--          </v-expansion-panel>-->
-<!--        </v-expansion-panels>-->
-
       </v-card>
 
     </v-col>
@@ -117,9 +77,9 @@
 <script>
 
 export default {
-  components: {
 
-  },
+  components: {},
+
   data() {
     return {
 
@@ -161,6 +121,7 @@ export default {
             this.iconColor = "green"
             this.showIcon = this.successIcon
             console.log("success")
+            this.$router.push({ path: '/' })
           })
           .catch((error) => {
             this.iconColor = "red"
@@ -183,6 +144,7 @@ export default {
             this.iconColor = "green"
             this.showIcon = this.successIcon
             console.log("success")
+            this.$router.push({ path: '/' })
           })
           .catch((error) => {
             this.iconColor = "red"
@@ -198,12 +160,5 @@ export default {
 </script>
 
 <style>
-
-  .ex-panel-header {
-    color: #737373;
-    font-family: "Roboto", sans-serif;
-    /*transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);*/
-    font-size: 16px;
-  }
 
 </style>
