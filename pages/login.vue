@@ -13,7 +13,8 @@
         </v-card-title>
 
         <!-- v-on:submit.prevent stops form from reloading page on submit
-            (as form is not doing a post, action is done programmatically in methods)  -->
+            (as form is not doing a post, action is done programmatically in methods),
+             setting to 'checkSubmit' calls this function instead on return key press-->
         <v-form
           ref="form"
           lazy-validation
