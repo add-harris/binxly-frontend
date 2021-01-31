@@ -11,6 +11,16 @@
 
         </v-card-title>
 
+        <v-row justify="space-around" align="center">
+
+          <v-card-actions>
+            <v-btn class="ma-6" color="primary" to="/create">Create</v-btn>
+          </v-card-actions>
+
+        </v-row>
+
+
+
       </v-card>
 
     </v-col>
