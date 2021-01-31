@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "fir-static-website-d6299"
+  },
+  "targets": {
+    "fir-static-website-d6299": {
+      "hosting": {
+        "dev-binxley": [
+          "binxley"
+        ]
+      }
+    }
   }
 }
