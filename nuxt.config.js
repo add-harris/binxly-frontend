@@ -69,8 +69,8 @@ export default {
       projectId: "fir-static-website-d6299",
       storageBucket: "fir-static-website-d6299.appspot.com",
       messagingSenderId: "242946123236",
-      appId: "1:242946123236:web:0836f354d78433c4a993f1",
-      measurementId: "G-N7RQMQD21J"
+      appId: "1:242946123236:web:a2a05865aa35879fa993f1",
+      measurementId: "G-QNYVKR3T6H"
     },
     services: {
       auth: authConfig()

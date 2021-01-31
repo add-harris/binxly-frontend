@@ -12,7 +12,7 @@
       <template v-slot:prepend>
         <v-list-item>
           <v-list-item-icon
-            @click.stop="mini = !mini"
+            @click.stop="openAndClose"
           >
             <v-icon>mdi-palette-advanced</v-icon>
           </v-list-item-icon>
@@ -45,6 +45,8 @@
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-text-field label="Title" v-model="title"></v-text-field>
+              <v-checkbox label="Checkbox 1"></v-checkbox>
+              <v-select label="Selector"></v-select>
             </v-expansion-panel-content>
           </v-expansion-panel>
 
@@ -163,6 +165,16 @@ export default {
 
       this.mini = true
       this.openPanels = []
+
+    },
+
+    openAndClose() {
+
+      if (this.mini) {
+        this.mini = false
+      } else {
+        this.collapseAll()
+      }
 
     }
 
