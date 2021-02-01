@@ -52,6 +52,22 @@
 
       </v-expansion-panels>
 
+      <v-row justify="center" align="center" class="ma-2">
+
+        <!-- bottom prop is also good look -->
+        <v-btn
+          x-small
+          color="primary"
+          fab
+          fixed
+          dark
+          class="mt-10"
+        >
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+
+      </v-row>
+
 
     </v-navigation-drawer>
 
@@ -147,17 +163,7 @@ export default {
     }
   },
   
-  computed: {
-
-    iconClasses() {
-      let closedClass = "pl-4 pt-3"
-      let openClass = "pl-3 pt-5"
-
-      return openClass
-
-    }
-
-  },
+  computed: {},
   
   methods: {
 
