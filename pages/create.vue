@@ -52,6 +52,14 @@
 
       </v-expansion-panels>
 
+      <v-select
+        label="Solo field"
+        solo
+        class="ma-2"
+        v-if="addNew"
+        :items="newSelections"
+      ></v-select>
+
       <v-row justify="center" align="center" class="ma-2">
 
         <!-- bottom prop is also good look -->
@@ -61,9 +69,10 @@
           fab
           fixed
           dark
-          class="mt-10"
+          :class="addNew ? '' : 'mt-10'"
+          @click.stop="plusAndMinus"
         >
-          <v-icon>mdi-plus</v-icon>
+          <v-icon>{{ addNew ? 'mdi-minus' : 'mdi-plus' }}</v-icon>
         </v-btn>
 
       </v-row>
@@ -144,20 +153,17 @@ export default {
 
   data() {
     return {
+
       openDraw: true,
       mini: true,
       openPanels: [],
+      addNew: false,
 
       title: "Title",
 
-      items: [
-        {
-          action: 'mdi-application',
-          items: [
-            { title: 'Title' },
-          ],
-          title: 'Nav Bar',
-        },
+      newSelections: [
+        "Text Box",
+        "Image"
       ],
 
     }
@@ -168,20 +174,24 @@ export default {
   methods: {
 
     collapseAll() {
-
       this.mini = true
       this.openPanels = []
-
+      this.addNew = false
     },
 
     openAndClose() {
-
       if (this.mini) {
         this.mini = false
       } else {
         this.collapseAll()
       }
+    },
 
+    plusAndMinus() {
+      if (this.mini) {
+        this.mini = false
+        this.addNew = true
+      } else this.addNew = !this.addNew;
     }
 
   },
