@@ -58,6 +58,7 @@
         class="ma-2"
         v-if="addNew"
         :items="newSelections"
+        v-on:change="newItemSelected"
       ></v-select>
 
       <v-row justify="center" align="center" class="ma-2">
@@ -131,7 +132,10 @@
         class="overflow-y-auto"
         max-height="600"
       >
-        <v-container style="height: 1000px;"></v-container>
+
+        <v-container style="height: 1000px;">
+          <h1 style="padding-top: 300px">{{ components }}</h1>
+        </v-container>
       </v-sheet>
     </v-card>
 
@@ -166,6 +170,8 @@ export default {
         "Image"
       ],
 
+      components: []
+
     }
   },
   
@@ -192,6 +198,11 @@ export default {
         this.mini = false
         this.addNew = true
       } else this.addNew = !this.addNew;
+    },
+
+    newItemSelected(item) {
+      this.addNew = false
+      this.components.push(item)
     }
 
   },
