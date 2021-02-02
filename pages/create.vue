@@ -31,24 +31,44 @@
 
       <v-divider></v-divider>
 
+      <!-- This could be split to separate compenents, but would need to move all data into the store, as props should not be mutated directly -->
       <v-expansion-panels inset v-model="openPanels">
 
-          <v-expansion-panel>
+        <!-- First Panel for Nav Bar is always there -->
+        <v-expansion-panel>
 
-            <v-expansion-panel-header class="pl-4" :hide-actions="mini">
-              <v-icon style="position: absolute;">
-                mdi-application
-              </v-icon>
-              <div class="ml-8 text-no-wrap">
-                {{ mini ? "" : "Nav Bar" }}
-              </div>
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <v-text-field label="Title" v-model="title"></v-text-field>
-              <v-checkbox label="Checkbox 1"></v-checkbox>
-              <v-select label="Selector"></v-select>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
+          <v-expansion-panel-header class="pl-4" :hide-actions="mini">
+            <v-icon style="position: absolute;">
+              mdi-application
+            </v-icon>
+            <div class="ml-8 text-no-wrap">
+              {{ mini ? "" : "Nav Bar" }}
+            </div>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-text-field label="Title" v-model="navBar.title"></v-text-field>
+            <v-checkbox label="Checkbox 1"></v-checkbox>
+            <v-select label="Selector"></v-select>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+
+        <!-- Rest of the Panels are dynamic -->
+        <v-expansion-panel v-for="panel in controlPanels">
+
+          <v-expansion-panel-header class="pl-4" :hide-actions="mini">
+            <v-icon style="position: absolute;">
+              mdi-application
+            </v-icon>
+            <div class="ml-8 text-no-wrap">
+              {{ mini ? "" : "Nav Bar" }}
+            </div>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-text-field label="Title" v-model="navBar.title"></v-text-field>
+            <v-checkbox label="Checkbox 1"></v-checkbox>
+            <v-select label="Selector"></v-select>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
 
       </v-expansion-panels>
 
@@ -58,6 +78,8 @@
         class="ma-2"
         v-if="addNew"
         :items="newSelections"
+        item-text="name"
+        return-object
         v-on:change="newItemSelected"
       ></v-select>
 
@@ -81,63 +103,7 @@
 
     </v-navigation-drawer>
 
-
-
-    <v-card class="overflow-hidden">
-      <v-app-bar
-        absolute
-        color="#6A76AB"
-        dark
-        shrink-on-scroll
-        prominent
-        src="https://picsum.photos/1920/1080?random"
-        fade-img-on-scroll
-        scroll-target="#scrolling-techniques-3"
-      >
-        <template v-slot:img="{ props }">
-          <v-img
-            v-bind="props"
-            gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
-          ></v-img>
-        </template>
-
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-        <v-app-bar-title>{{ title }}</v-app-bar-title>
-
-        <v-spacer></v-spacer>
-
-        <v-btn icon>
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-
-        <v-btn icon>
-          <v-icon>mdi-heart</v-icon>
-        </v-btn>
-
-        <v-btn icon>
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
-
-        <template v-slot:extension>
-          <v-tabs align-with-title>
-            <v-tab>Tab 1</v-tab>
-            <v-tab>Tab 2</v-tab>
-            <v-tab>Tab 3</v-tab>
-          </v-tabs>
-        </template>
-      </v-app-bar>
-      <v-sheet
-        id="scrolling-techniques-3"
-        class="overflow-y-auto"
-        max-height="600"
-      >
-
-        <v-container style="height: 1000px;">
-          <h1 style="padding-top: 300px">{{ components }}</h1>
-        </v-container>
-      </v-sheet>
-    </v-card>
+    <ViewPanel :nav-bar="navBar" :components="components" ></ViewPanel>
 
   </div>
 
@@ -147,11 +113,15 @@
 
 <script>
 
+import ViewPanel from '../components/ViewPanel.vue';
+
 export default {
 
   name: "create",
   
-  components: {},
+  components: {
+    ViewPanel
+  },
 
   middleware: 'auth',
 
@@ -163,14 +133,29 @@ export default {
       openPanels: [],
       addNew: false,
 
-      title: "Title",
+      navBar: {
+        title: "Title"
+      },
 
       newSelections: [
-        "Text Box",
-        "Image"
+        {
+          name: "Text Box",
+          type: "text-box",
+          properties: {
+            text: "text",
+          }
+        },
+        {
+          name: "Image",
+          type: "image",
+          properties: {
+            url: "https://picsum.photos/1920/1080?random"
+          }
+        }
       ],
 
-      components: []
+      controlPanels: [],
+      components: [],
 
     }
   },
@@ -200,9 +185,9 @@ export default {
       } else this.addNew = !this.addNew;
     },
 
-    newItemSelected(item) {
+    newItemSelected(obj) {
       this.addNew = false
-      this.components.push(item)
+      this.components.push(obj)
     }
 
   },
