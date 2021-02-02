@@ -3,14 +3,14 @@
     <v-card class="mx-auto" width="300" height="250">
 
       <v-card-title>
-        {{ component.type }}
+        {{ component.name }}
       </v-card-title>
 
       <v-card-text v-if="component.type === 'text-box'">
-        {{ component.properties.text }}
+        {{ component.textArea.value }}
       </v-card-text>
 
-      <v-img v-if="component.type === 'image'" :src="component.properties.url" height="250">
+      <v-img v-if="component.type === 'image'" :src="component.textFields[0].value" height="250">
       </v-img>
 
     </v-card>

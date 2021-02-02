@@ -12,7 +12,7 @@
 
         <div style="padding-top: 250px"></div>
 
-        <v-row justify="center" align="center" class="ma-6" v-for="component in components" :key="component.type">
+        <v-row justify="center" align="center" class="ma-6" v-for="(component, index) in components" :key="component.type + index">
 
           <MultiComponent :component="component"></MultiComponent>
 

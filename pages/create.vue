@@ -57,16 +57,15 @@
 
           <v-expansion-panel-header class="pl-4" :hide-actions="mini">
             <v-icon style="position: absolute;">
-              mdi-application
+              {{ panel.icon }}
             </v-icon>
             <div class="ml-8 text-no-wrap">
-              {{ mini ? "" : "Nav Bar" }}
+              {{ mini ? "" : panel.name }}
             </div>
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <v-text-field label="Title" v-model="navBar.title"></v-text-field>
-            <v-checkbox label="Checkbox 1"></v-checkbox>
-            <v-select label="Selector"></v-select>
+            <v-text-field v-if="panel.textFields" v-for="textField in panel.textFields" :key="textField.label" :label="textField.label" v-model="textField.value"></v-text-field>
+            <v-textarea v-if="panel.textArea" :label="panel.textArea.label" v-model="panel.textArea.value"></v-textarea>
           </v-expansion-panel-content>
         </v-expansion-panel>
 
@@ -141,16 +140,22 @@ export default {
         {
           name: "Text Box",
           type: "text-box",
-          properties: {
-            text: "text",
-          }
+          icon: "mdi-card-text-outline",
+          textArea: {
+            label: "Text",
+            value: ""
+          },
         },
         {
           name: "Image",
           type: "image",
-          properties: {
-            url: "https://picsum.photos/1920/1080?random"
-          }
+          icon: "mdi-image-outline",
+          textFields: [
+            {
+              label: "Url",
+              value: "https://picsum.photos/1920/1080?random"
+            }
+          ]
         }
       ],
 
@@ -187,7 +192,9 @@ export default {
 
     newItemSelected(obj) {
       this.addNew = false
-      this.components.push(obj)
+      const newObj = Object.assign(obj)
+      this.components.push(newObj)
+      this.controlPanels.push(newObj)
     }
 
   },
