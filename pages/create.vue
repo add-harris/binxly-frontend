@@ -8,6 +8,7 @@
       permanent
       v-model="openDraw"
       :mini-variant.sync="mini"
+      width="300"
     >
       <template v-slot:prepend>
         <v-list-item>
@@ -140,22 +141,10 @@ export default {
         {
           name: "Text Box",
           type: "text-box",
-          icon: "mdi-card-text-outline",
-          textArea: {
-            label: "Text",
-            value: ""
-          },
         },
         {
           name: "Image",
           type: "image",
-          icon: "mdi-image-outline",
-          textFields: [
-            {
-              label: "Url",
-              value: "https://picsum.photos/1920/1080?random"
-            }
-          ]
         }
       ],
 
@@ -192,9 +181,45 @@ export default {
 
     newItemSelected(obj) {
       this.addNew = false
-      const newObj = Object.assign(obj)
-      this.components.push(newObj)
-      this.controlPanels.push(newObj)
+
+      switch (obj.type) {
+        case "image":
+          this.createImage(obj)
+          break;
+        case "text-box":
+          this.createTextBox(obj)
+          break;
+      }
+    },
+
+    createTextBox(obj) {
+      const textObj = {
+        name: obj.name,
+        type: obj.type,
+        icon: "mdi-card-text-outline",
+        textArea: {
+        label: "Text",
+          value: ""
+        }
+      }
+      this.components.push(textObj)
+      this.controlPanels.push(textObj)
+    },
+
+    createImage(obj) {
+      const imageObj = {
+        name: obj.name,
+        type: obj.type,
+        icon: "mdi-image-outline",
+        textFields: [
+          {
+            label: "Url",
+            value: "https://picsum.photos/1920/1080?random"
+          }
+        ]
+      }
+      this.components.push(imageObj)
+      this.controlPanels.push(imageObj)
     }
 
   },
