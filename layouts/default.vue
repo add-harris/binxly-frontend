@@ -4,6 +4,7 @@
     <v-app-bar
       fixed
       app
+      clipped-left
     >
       <v-app-bar-nav-icon/>
 
@@ -36,7 +37,9 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-    </v-app-bar>
+    </v-app-bar
+      fixed
+      app>
 
     <v-main>
       <v-container>

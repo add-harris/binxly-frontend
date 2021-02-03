@@ -33,10 +33,14 @@
       <v-divider></v-divider>
 
       <!-- This could be split to separate compenents, but would need to move all data into the store, as props should not be mutated directly -->
-      <v-expansion-panels inset v-model="openPanels">
+      <v-expansion-panels
+        inset
+        tile
+        v-model="openPanels"
+      >
 
         <!-- First Panel for Nav Bar is always there -->
-        <v-expansion-panel>
+        <v-expansion-panel class="panel">
 
           <v-expansion-panel-header class="pl-4" :hide-actions="mini">
             <v-icon style="position: absolute;">
@@ -54,7 +58,10 @@
         </v-expansion-panel>
 
         <!-- Rest of the Panels are dynamic -->
-        <v-expansion-panel v-for="panel in controlPanels">
+        <v-expansion-panel
+          class="panel"
+          v-for="panel in controlPanels"
+        >
 
           <v-expansion-panel-header class="pl-4" :hide-actions="mini">
             <v-icon style="position: absolute;">
@@ -228,6 +235,10 @@ export default {
 
 </script>
 
-<style scoped>
+<style >
+
+  .panel {
+    margin-right: 2px;
+  }
 
 </style>
