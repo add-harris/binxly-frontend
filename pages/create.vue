@@ -98,7 +98,6 @@
           color="primary"
           fab
           fixed
-          dark
           :class="addNew ? '' : 'mt-10'"
           @click.stop="plusAndMinus"
         >
@@ -109,6 +108,64 @@
 
 
     </v-navigation-drawer>
+
+    <v-row align="center" class="ma-2">
+
+      <v-tabs
+      >
+        <v-tab v-for="(page, index) in pages">{{ 'Page ' + (index + 1) }}</v-tab>
+
+          <v-btn
+            x-small
+            color="primary"
+            fab
+            class="ma-2"
+            depressed
+            :disabled="pages.length > 2"
+            @click.stop="addPage"
+          >
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+
+        <v-btn
+          x-small
+          color="grey"
+          fab
+          class="mt-2"
+          depressed
+          :dark="pages.length > 1"
+          :disabled="pages.length < 2"
+          @click.stop="minusPage"
+        >
+          <v-icon>mdi-minus</v-icon>
+        </v-btn>
+
+      </v-tabs>
+
+    </v-row>
+
+<!--    <v-row justify="left" align="center" class="ma-2">-->
+
+<!--      <v-btn-toggle-->
+<!--        color="blue"-->
+<!--      >-->
+
+<!--        <v-btn v-for="page in pages">{{ 'Page ' + pages.length }}</v-btn>-->
+
+<!--      </v-btn-toggle>-->
+
+<!--      <v-btn-->
+<!--        x-small-->
+<!--        color="primary"-->
+<!--        fab-->
+<!--        dark-->
+<!--        class="ma-2"-->
+<!--        depressed-->
+<!--      >-->
+<!--        <v-icon>mdi-plus</v-icon>-->
+<!--      </v-btn>-->
+
+<!--    </v-row>-->
 
     <ViewPanel :nav-bar="navBar" :components="components" ></ViewPanel>
 
@@ -139,6 +196,8 @@ export default {
       mini: true,
       openPanels: [],
       addNew: false,
+      tab: null,
+      pages: [1],
 
       navBar: {
         title: "Title"
@@ -227,6 +286,14 @@ export default {
       }
       this.components.push(imageObj)
       this.controlPanels.push(imageObj)
+    },
+
+    addPage() {
+      this.pages.push(1)
+    },
+
+    minusPage() {
+      this.pages.pop()
     }
 
   },
