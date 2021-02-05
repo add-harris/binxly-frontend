@@ -72,8 +72,10 @@
             </div>
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <v-text-field v-if="panel.textFields" v-for="textField in panel.textFields" :key="textField.label" :label="textField.label" v-model="textField.value"></v-text-field>
-            <v-textarea v-if="panel.textArea" :label="panel.textArea.label" v-model="panel.textArea.value"></v-textarea>
+            <template v-for="input in panel.inputs">
+              <v-text-field v-if="input.type === 'textField'" :label="input.label" v-model="input.value"></v-text-field>
+              <v-textarea v-if="input.type === 'textArea'" :label="input.label" v-model="input.value"></v-textarea>
+            </template>
           </v-expansion-panel-content>
         </v-expansion-panel>
 
@@ -144,29 +146,6 @@
 
     </v-row>
 
-<!--    <v-row justify="left" align="center" class="ma-2">-->
-
-<!--      <v-btn-toggle-->
-<!--        color="blue"-->
-<!--      >-->
-
-<!--        <v-btn v-for="page in pages">{{ 'Page ' + pages.length }}</v-btn>-->
-
-<!--      </v-btn-toggle>-->
-
-<!--      <v-btn-->
-<!--        x-small-->
-<!--        color="primary"-->
-<!--        fab-->
-<!--        dark-->
-<!--        class="ma-2"-->
-<!--        depressed-->
-<!--      >-->
-<!--        <v-icon>mdi-plus</v-icon>-->
-<!--      </v-btn>-->
-
-<!--    </v-row>-->
-
     <ViewPanel :nav-bar="navBar" :components="components" ></ViewPanel>
 
   </div>
@@ -211,6 +190,10 @@ export default {
         {
           name: "Image",
           type: "image",
+        },
+        {
+          name: "Address",
+          type: "address",
         }
       ],
 
@@ -255,6 +238,9 @@ export default {
         case "text-box":
           this.createTextBox(obj)
           break;
+        case "address":
+          this.createAddress(obj)
+          break;
       }
     },
 
@@ -263,9 +249,12 @@ export default {
         name: obj.name,
         type: obj.type,
         icon: "mdi-card-text-outline",
-        textArea: {
-        label: "Text",
-          value: ""
+        inputs: {
+          text: {
+            label: "Text",
+            value: "",
+            type: "textArea"
+          }
         }
       }
       this.components.push(textObj)
@@ -277,15 +266,48 @@ export default {
         name: obj.name,
         type: obj.type,
         icon: "mdi-image-outline",
-        textFields: [
-          {
+        inputs: {
+          url: {
             label: "Url",
-            value: "https://picsum.photos/1920/1080?random"
+            value: "https://picsum.photos/1920/1080?random",
+            type: "textField"
           }
-        ]
+        }
       }
       this.components.push(imageObj)
       this.controlPanels.push(imageObj)
+    },
+
+    createAddress(obj) {
+      const addressObj = {
+        name: obj.name,
+        type: obj.type,
+        icon: "mdi-email-outline",
+        inputs: {
+          line1: {
+            label: "Address Line 1",
+            value: "Address Line 1",
+            type: "textField"
+          },
+          line2: {
+            label: "Address Line 2",
+            value: "Address Line 2",
+            type: "textField"
+          },
+          line3: {
+            label: "Address Line 3",
+            value: "Address Line 3",
+            type: "textField"
+          },
+          postCode: {
+            label: "Post Code",
+            value: "Post Code",
+            type: "textField"
+          },
+        }
+      }
+      this.components.push(addressObj)
+      this.controlPanels.push(addressObj)
     },
 
     addPage() {
