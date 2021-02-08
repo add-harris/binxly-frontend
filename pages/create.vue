@@ -146,6 +146,8 @@
 
     </v-row>
 
+    <TestBanner></TestBanner>
+
     <ViewPanel :nav-bar="navBar" :components="components" ></ViewPanel>
 
   </div>
@@ -156,6 +158,7 @@
 
 <script>
 
+import TestBanner from 'binxley-vue-lib';
 import ViewPanel from '../components/ViewPanel.vue';
 
 export default {
@@ -163,7 +166,8 @@ export default {
   name: "create",
   
   components: {
-    ViewPanel
+    ViewPanel,
+    TestBanner
   },
 
   middleware: 'auth',
