@@ -57,6 +57,19 @@ This will create the `.firebaserc` & `firebase.json` files.
 - `.firebaserc` specifies the firebase project to deploy to.
 - `firebase.json` specifies how and what files to publish i.e. contents of `/dist`.
 
+### Firebase Emulators
+
+For local development the firebase emulators need tobe running to stub the firebase 
+auth endpoints. Run the emulators with this command:
+
+```bash
+$ firebase emulators:start
+```
+
+A `.env` file must also be present with the variable `EMULATORS='true'` setup.
+This is read by the `nuxt.config.js` to tell nuxt to use the emulators 
+when starting up locally.
+
 ### Run Nuxt in Dev Mode
 
 Served on localhost:3000 with hot loading.

@@ -1,5 +1,5 @@
 {
-  "name": "binxley-frontend",
+  "name": "binxly-frontend",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -13,7 +13,7 @@
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/firebase": "^7.3.0",
     "@nuxtjs/pwa": "^3.0.2",
-    "binxley-vue-lib": "file:../binxley-vue-lib",
+    "binxly-vue-lib": "file:../binxly-vue-lib",
     "core-js": "^3.6.5",
     "firebase": "^8.2.3",
     "nuxt": "^2.14.6"

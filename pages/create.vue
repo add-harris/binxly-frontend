@@ -158,13 +158,13 @@
 
 <script>
 
-import TestBanner from 'binxley-vue-lib';
+import TestBanner from 'binxly-vue-lib';
 import ViewPanel from '../components/ViewPanel.vue';
 
 export default {
 
   name: "create",
-  
+
   components: {
     ViewPanel,
     TestBanner
@@ -206,9 +206,9 @@ export default {
 
     }
   },
-  
+
   computed: {},
-  
+
   methods: {
 
     collapseAll() {
