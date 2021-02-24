@@ -33,62 +33,64 @@
       <v-divider></v-divider>
 
       <!-- This could be split to separate compenents, but would need to move all data into the store, as props should not be mutated directly -->
-      <v-expansion-panels
-        inset
-        tile
-        v-model="openPanels"
-      >
-
+<!--      <v-expansion-panels-->
+<!--        inset-->
+<!--        tile-->
+<!--        v-model="openPanels"-->
+<!--      >-->
+<!---->
         <!-- First Panel for Nav Bar is always there -->
-        <v-expansion-panel class="panel">
+<!--        <v-expansion-panel class="panel">-->
 
-          <v-expansion-panel-header class="pl-4" :hide-actions="mini">
-            <v-icon style="position: absolute;">
-              mdi-application
-            </v-icon>
-            <div class="ml-8 text-no-wrap">
-              {{ mini ? "" : "Nav Bar" }}
-            </div>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <v-text-field label="Title" v-model="navBar.title"></v-text-field>
-            <v-switch
-              v-model="multiPage"
-              label="Multi-Page"
-            ></v-switch>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
+<!--          <v-expansion-panel-header class="pl-4" :hide-actions="mini">-->
+<!--            <v-icon style="position: absolute;">-->
+<!--              mdi-application-->
+<!--            </v-icon>-->
+<!--            <div class="ml-8 text-no-wrap">-->
+<!--              {{ mini ? "" : "Nav Bar" }}-->
+<!--            </div>-->
+<!--          </v-expansion-panel-header>-->
+<!--          <v-expansion-panel-content>-->
+<!--            <v-text-field label="Title" v-model="navBar.title"></v-text-field>-->
+<!--            <v-switch-->
+<!--              v-model="multiPage"-->
+<!--              label="Multi-Page"-->
+<!--            ></v-switch>-->
+<!--          </v-expansion-panel-content>-->
+<!--        </v-expansion-panel>-->
 
-        <!-- Rest of the Panels are dynamic -->
-        <v-expansion-panel
-          class="panel"
-          v-for="(panel, index) in controlPanels"
-          :key="panel.type + index"
-        >
+<!--        &lt;!&ndash; Rest of the Panels are dynamic &ndash;&gt;-->
+<!--        <v-expansion-panel-->
+<!--          class="panel"-->
+<!--          v-for="(panel, index) in controlPanels"-->
+<!--          :key="panel.type + index"-->
+<!--        >-->
 
-          <v-expansion-panel-header class="pl-4" :hide-actions="mini">
-            <v-icon style="position: absolute;">
-              {{ panel.icon }}
-            </v-icon>
-            <div class="ml-8 text-no-wrap">
-              {{ mini ? "" : panel.name }}
-            </div>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <template v-for="input in panel.inputs">
-              <v-text-field v-if="input.type === 'textField'" :label="input.label" v-model="input.value"></v-text-field>
-              <v-textarea v-if="input.type === 'textArea'" :label="input.label" v-model="input.value"></v-textarea>
-            </template>
-            <v-btn
-              icon
-              float-right
-            >
-              <v-icon>mdi-minus</v-icon>
-            </v-btn>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
+<!--          <v-expansion-panel-header class="pl-4" :hide-actions="mini">-->
+<!--            <v-icon style="position: absolute;">-->
+<!--              {{ panel.icon }}-->
+<!--            </v-icon>-->
+<!--            <div class="ml-8 text-no-wrap">-->
+<!--              {{ mini ? "" : panel.name }}-->
+<!--            </div>-->
+<!--          </v-expansion-panel-header>-->
+<!--          <v-expansion-panel-content>-->
+<!--            <template v-for="input in panel.inputs">-->
+<!--              <v-text-field v-if="input.type === 'textField'" :label="input.label" v-model="input.value"></v-text-field>-->
+<!--              <v-textarea v-if="input.type === 'textArea'" :label="input.label" v-model="input.value"></v-textarea>-->
+<!--            </template>-->
+<!--            <v-btn-->
+<!--              icon-->
+<!--              float-right-->
+<!--            >-->
+<!--              <v-icon>mdi-minus</v-icon>-->
+<!--            </v-btn>-->
+<!--          </v-expansion-panel-content>-->
+<!--        </v-expansion-panel>-->
 
-      </v-expansion-panels>
+<!--      </v-expansion-panels>-->
+
+      <ExpansionPanels :mini="mini"></ExpansionPanels>
 
       <v-select
         label="Solo field"
@@ -120,9 +122,9 @@
 
     </v-navigation-drawer>
 
-    <v-row align="center" class="ma-2">
+    <v-row align="center" class="ma-2" v-if="multiPage">
 
-      <v-tabs v-if="multiPage">
+      <v-tabs>
         <v-tab v-for="(page, index) in pages" :key=" 'page' + index ">{{ 'Page ' + (index + 1) }}</v-tab>
 
           <v-btn
@@ -167,15 +169,19 @@
 <script>
 
 import TestBanner from 'binxly-vue-lib';
+import ExpansionPanels from '../components/ExpansionPanels.vue';
 import ViewPanel from '../components/ViewPanel.vue';
+
+import { mapState, mapMutations } from 'vuex'
 
 export default {
 
   name: "create",
 
   components: {
+    TestBanner,
+    ExpansionPanels,
     ViewPanel,
-    TestBanner
   },
 
   middleware: 'auth',
@@ -190,10 +196,6 @@ export default {
       tab: null,
       multiPage: false,
       pages: [1],
-
-      navBar: {
-        title: "Title"
-      },
 
       newSelections: [
         {
@@ -210,15 +212,25 @@ export default {
         }
       ],
 
-      controlPanels: [],
-      components: [],
-
     }
   },
 
-  computed: {},
+  computed: {
+
+    ...mapState({
+      navBar: state => state.components.navBar,
+      components: state => state.components.components,
+      controlPanels: state => state.components.controlPanels
+    }),
+
+  },
 
   methods: {
+
+    ...mapMutations({
+      addControlPanel: 'components/addControlPanel',
+      addComponent: 'components/addComponent'
+    }),
 
     collapseAll() {
       this.mini = true
@@ -270,8 +282,8 @@ export default {
           }
         }
       }
-      this.components.push(textObj)
-      this.controlPanels.push(textObj)
+      this.addComponent(textObj)
+      this.addControlPanel(textObj)
     },
 
     createImage(obj) {
@@ -287,8 +299,8 @@ export default {
           }
         }
       }
-      this.components.push(imageObj)
-      this.controlPanels.push(imageObj)
+      this.addComponent(imageObj)
+      this.addControlPanel(imageObj)
     },
 
     createAddress(obj) {
@@ -319,8 +331,8 @@ export default {
           },
         }
       }
-      this.components.push(addressObj)
-      this.controlPanels.push(addressObj)
+      this.addComponent(addressObj)
+      this.addControlPanel(addressObj)
     },
 
     addPage() {
