@@ -52,8 +52,10 @@
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-text-field label="Title" v-model="navBar.title"></v-text-field>
-            <v-checkbox label="Checkbox 1"></v-checkbox>
-            <v-select label="Selector"></v-select>
+            <v-switch
+              v-model="multiPage"
+              label="Multi-Page"
+            ></v-switch>
           </v-expansion-panel-content>
         </v-expansion-panel>
 
@@ -76,6 +78,12 @@
               <v-text-field v-if="input.type === 'textField'" :label="input.label" v-model="input.value"></v-text-field>
               <v-textarea v-if="input.type === 'textArea'" :label="input.label" v-model="input.value"></v-textarea>
             </template>
+            <v-btn
+              icon
+              float-right
+            >
+              <v-icon>mdi-minus</v-icon>
+            </v-btn>
           </v-expansion-panel-content>
         </v-expansion-panel>
 
@@ -113,8 +121,7 @@
 
     <v-row align="center" class="ma-2">
 
-      <v-tabs
-      >
+      <v-tabs v-if="multiPage">
         <v-tab v-for="(page, index) in pages">{{ 'Page ' + (index + 1) }}</v-tab>
 
           <v-btn
@@ -148,7 +155,7 @@
 
     <TestBanner></TestBanner>
 
-    <ViewPanel :nav-bar="navBar" :components="components" ></ViewPanel>
+    <ViewPanel :nav-bar="navBar" :components="components" :multi-page="multiPage"></ViewPanel>
 
   </div>
 
@@ -180,6 +187,7 @@ export default {
       openPanels: [],
       addNew: false,
       tab: null,
+      multiPage: false,
       pages: [1],
 
       navBar: {

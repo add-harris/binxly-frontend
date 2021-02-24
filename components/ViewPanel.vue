@@ -4,7 +4,7 @@
   <v-card class="overflow-hidden">
 
 
-    <ViewPanelAppBar :nav-bar="navBar"></ViewPanelAppBar>
+    <ViewPanelAppBar :nav-bar="navBar" :multi-page="multiPage"></ViewPanelAppBar>
 
 
     <v-sheet id="scrolling-techniques-3" class="overflow-y-auto" max-height="600">
@@ -32,7 +32,7 @@ import MultiComponent from './MultiComponent.vue';
 export default {
 
   name: "ViewPanel",
-  
+
   components: {
     MultiComponent,
     ViewPanelAppBar
@@ -40,15 +40,16 @@ export default {
 
   props: {
     navBar: Object,
-    components: Array
+    components: Array,
+    multiPage: Boolean
   },
 
   data() {
     return {}
   },
-  
+
   computed: {},
-  
+
   methods: {},
 
 }

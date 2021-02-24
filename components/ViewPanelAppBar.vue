@@ -35,7 +35,7 @@
       <v-icon>mdi-dots-vertical</v-icon>
     </v-btn>
 
-    <template v-slot:extension>
+    <template v-slot:extension v-if="multiPage" >
       <v-tabs align-with-title>
         <v-tab>Tab 1</v-tab>
         <v-tab>Tab 2</v-tab>
@@ -51,19 +51,20 @@
 export default {
 
   name: "ViewPanelAppBar",
-  
+
   components: {},
 
   props: {
-    navBar: Object
+    navBar: Object,
+    multiPage: Boolean
   },
 
   data() {
     return {}
   },
-  
+
   computed: {},
-  
+
   methods: {},
 
 }
