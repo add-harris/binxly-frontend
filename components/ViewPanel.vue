@@ -10,7 +10,7 @@
     <v-sheet id="scrolling-techniques-3" class="overflow-y-auto" max-height="600">
       <v-container style="height: 1000px;">
 
-        <div style="padding-top: 250px"></div>
+        <div :style="{ paddingTop: checkMultiPage }"></div>
 
         <v-row justify="center" align="center" class="ma-6" v-for="(component, index) in components" :key="component.type + index">
 
@@ -48,7 +48,11 @@ export default {
     return {}
   },
 
-  computed: {},
+  computed: {
+    checkMultiPage() {
+      return this.multiPage ? "250px" : "150px"
+    }
+  },
 
   methods: {},
 

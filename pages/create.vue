@@ -62,7 +62,8 @@
         <!-- Rest of the Panels are dynamic -->
         <v-expansion-panel
           class="panel"
-          v-for="panel in controlPanels"
+          v-for="(panel, index) in controlPanels"
+          :key="panel.type + index"
         >
 
           <v-expansion-panel-header class="pl-4" :hide-actions="mini">
@@ -122,7 +123,7 @@
     <v-row align="center" class="ma-2">
 
       <v-tabs v-if="multiPage">
-        <v-tab v-for="(page, index) in pages">{{ 'Page ' + (index + 1) }}</v-tab>
+        <v-tab v-for="(page, index) in pages" :key=" 'page' + index ">{{ 'Page ' + (index + 1) }}</v-tab>
 
           <v-btn
             x-small

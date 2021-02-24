@@ -2,4 +2,4 @@
 
 rm -rf node_modules/binxly-vue-lib
 
-npm install ../binxly-vue-lib
+npm install binxly-vue-lib

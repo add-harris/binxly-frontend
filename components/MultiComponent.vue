@@ -7,7 +7,7 @@
 
     <v-card v-if="component.type === 'image'" class="mx-auto" width="300" height="250">
 
-      <v-img  :src="component.textFields[0].value" height="250"></v-img>
+      <v-img  :src="component.inputs.url.value" height="250"></v-img>
 
     </v-card>
 
