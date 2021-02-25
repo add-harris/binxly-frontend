@@ -89,10 +89,14 @@ export default {
       controlPanels: 'components/getControlPanels'
     }),
 
+    // this is the only way to deep clone an array of objects
+    // article: https://www.freecodecamp.org/news/how-to-clone-an-array-in-javascript-1d3183468f6a/
     localControlPanels() {
       return JSON.parse(JSON.stringify(this.controlPanels))
     },
 
+    // This is 2-way computed property or computed setter, it allows you to model to values held in the store
+    // article: https://vuex.vuejs.org/guide/forms.html#two-way-computed-property
     title: {
       get() {
         return this.getTitle
@@ -114,7 +118,10 @@ export default {
     updatePanelValue(panelIndex, key, newValue) {
       const updateParams = { panelIndex, key, newValue }
       this.updateControlPanel(updateParams)
+    },
 
+    collapsePanels() {
+      this.openPanels = []
     }
 
   }
@@ -124,5 +131,9 @@ export default {
 </script>
 
 <style scoped>
+
+  .panel {
+    margin-right: 2px;
+  }
 
 </style>

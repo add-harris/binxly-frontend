@@ -32,65 +32,7 @@
 
       <v-divider></v-divider>
 
-      <!-- This could be split to separate compenents, but would need to move all data into the store, as props should not be mutated directly -->
-<!--      <v-expansion-panels-->
-<!--        inset-->
-<!--        tile-->
-<!--        v-model="openPanels"-->
-<!--      >-->
-<!---->
-        <!-- First Panel for Nav Bar is always there -->
-<!--        <v-expansion-panel class="panel">-->
-
-<!--          <v-expansion-panel-header class="pl-4" :hide-actions="mini">-->
-<!--            <v-icon style="position: absolute;">-->
-<!--              mdi-application-->
-<!--            </v-icon>-->
-<!--            <div class="ml-8 text-no-wrap">-->
-<!--              {{ mini ? "" : "Nav Bar" }}-->
-<!--            </div>-->
-<!--          </v-expansion-panel-header>-->
-<!--          <v-expansion-panel-content>-->
-<!--            <v-text-field label="Title" v-model="navBar.title"></v-text-field>-->
-<!--            <v-switch-->
-<!--              v-model="multiPage"-->
-<!--              label="Multi-Page"-->
-<!--            ></v-switch>-->
-<!--          </v-expansion-panel-content>-->
-<!--        </v-expansion-panel>-->
-
-<!--        &lt;!&ndash; Rest of the Panels are dynamic &ndash;&gt;-->
-<!--        <v-expansion-panel-->
-<!--          class="panel"-->
-<!--          v-for="(panel, index) in controlPanels"-->
-<!--          :key="panel.type + index"-->
-<!--        >-->
-
-<!--          <v-expansion-panel-header class="pl-4" :hide-actions="mini">-->
-<!--            <v-icon style="position: absolute;">-->
-<!--              {{ panel.icon }}-->
-<!--            </v-icon>-->
-<!--            <div class="ml-8 text-no-wrap">-->
-<!--              {{ mini ? "" : panel.name }}-->
-<!--            </div>-->
-<!--          </v-expansion-panel-header>-->
-<!--          <v-expansion-panel-content>-->
-<!--            <template v-for="input in panel.inputs">-->
-<!--              <v-text-field v-if="input.type === 'textField'" :label="input.label" v-model="input.value"></v-text-field>-->
-<!--              <v-textarea v-if="input.type === 'textArea'" :label="input.label" v-model="input.value"></v-textarea>-->
-<!--            </template>-->
-<!--            <v-btn-->
-<!--              icon-->
-<!--              float-right-->
-<!--            >-->
-<!--              <v-icon>mdi-minus</v-icon>-->
-<!--            </v-btn>-->
-<!--          </v-expansion-panel-content>-->
-<!--        </v-expansion-panel>-->
-
-<!--      </v-expansion-panels>-->
-
-      <ExpansionPanels :mini="mini"></ExpansionPanels>
+      <ExpansionPanels :mini="mini" ref="expansionPanels"></ExpansionPanels>
 
       <v-select
         label="Solo field"
@@ -191,7 +133,6 @@ export default {
 
       openDraw: true,
       mini: true,
-      openPanels: [],
       addNew: false,
       tab: null,
       multiPage: false,
@@ -232,10 +173,12 @@ export default {
       addComponent: 'components/addComponent'
     }),
 
+    // use refs to access methods and values from child component instances
+    // docs: https://vuejs.org/v2/guide/components-edge-cases.html#Accessing-Child-Component-Instances-amp-Child-Elements
     collapseAll() {
       this.mini = true
-      this.openPanels = []
       this.addNew = false
+      this.$refs.expansionPanels.collapsePanels()
     },
 
     openAndClose() {
@@ -350,9 +293,5 @@ export default {
 </script>
 
 <style >
-
-  .panel {
-    margin-right: 2px;
-  }
 
 </style>

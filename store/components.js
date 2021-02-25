@@ -38,7 +38,8 @@ export const mutations = {
   },
 
   updateControlPanel(state, obj) {
-    console.log(obj)
+    const { panelIndex, key, newValue } = obj
+    state.controlPanels[panelIndex].inputs[key].value = newValue
   },
 
   addComponent(state, obj) {
