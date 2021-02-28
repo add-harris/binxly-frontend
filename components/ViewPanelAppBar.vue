@@ -35,13 +35,6 @@
       <v-icon>mdi-dots-vertical</v-icon>
     </v-btn>
 
-    <template v-slot:extension v-if="multiPage" >
-      <v-tabs align-with-title>
-        <v-tab>Tab 1</v-tab>
-        <v-tab>Tab 2</v-tab>
-        <v-tab>Tab 3</v-tab>
-      </v-tabs>
-    </template>
   </v-app-bar>
 
 </template>
@@ -56,7 +49,6 @@ export default {
 
   props: {
     navBar: Object,
-    multiPage: Boolean
   },
 
   data() {

@@ -3,14 +3,12 @@
 
   <v-card class="overflow-hidden">
 
-
-    <ViewPanelAppBar :nav-bar="navBar" :multi-page="multiPage"></ViewPanelAppBar>
-
+    <ViewPanelAppBar :nav-bar="navBar"></ViewPanelAppBar>
 
     <v-sheet id="scrolling-techniques-3" class="overflow-y-auto" max-height="600">
       <v-container style="height: 1000px;">
 
-        <div :style="{ paddingTop: checkMultiPage }"></div>
+        <div style="padding-top: 150px"></div>
 
         <v-row justify="center" align="center" class="ma-6" v-for="(component, index) in components" :key="component.type + index">
 
@@ -20,6 +18,7 @@
 
       </v-container>
     </v-sheet>
+
   </v-card>
 
 </template>
@@ -41,7 +40,6 @@ export default {
   props: {
     navBar: Object,
     components: Array,
-    multiPage: Boolean
   },
 
   data() {
@@ -49,9 +47,6 @@ export default {
   },
 
   computed: {
-    checkMultiPage() {
-      return this.multiPage ? "250px" : "150px"
-    }
   },
 
   methods: {},
