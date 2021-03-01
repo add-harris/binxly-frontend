@@ -26,19 +26,15 @@
 
       <client-only>
 
-      </client-only>
-
-      <client-only>
-
         <v-btn v-if="user" icon @click="logout">
-          <v-icon>mdi-logout</v-icon>
+          <v-icon >mdi-logout</v-icon>
         </v-btn>
 
       </client-only>
 
       <v-menu
-        bottom
-        left
+        v-if="user"
+        min-width="250"
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -54,12 +50,19 @@
 
         <v-list>
           <v-list-item>
-            <v-list-item-title>Profile</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon>mdi-account-circle</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>Profile</v-list-item-content>
           </v-list-item>
           <v-divider></v-divider>
           <v-list-item>
-            <v-list-item-title>Log out</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon>mdi-logout</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>Log out</v-list-item-content>
           </v-list-item>
+
         </v-list>
       </v-menu>
 
