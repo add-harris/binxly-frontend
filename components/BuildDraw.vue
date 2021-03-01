@@ -2,11 +2,11 @@
 
   <v-navigation-drawer
     app
-    fixed
     permanent
     v-model="openDraw"
     :mini-variant.sync="mini"
-    width="300"
+    width="400"
+    class="build-draw"
   >
     <template v-slot:prepend>
       <v-list-item>
@@ -116,5 +116,10 @@ export default {
 </script>
 
 <style scoped>
+
+.build-draw {
+  margin-top: 90px;
+  z-index: 1;
+}
 
 </style>
