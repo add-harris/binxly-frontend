@@ -4,6 +4,11 @@
 
     <BuildDraw></BuildDraw>
 
+    <v-row class="ma-6">
+      <v-spacer></v-spacer>
+      <v-btn color="primary">Finalise</v-btn>
+    </v-row>
+
     <ViewPanel :nav-bar="navBar" :components="components"></ViewPanel>
 
   </div>
