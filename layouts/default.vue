@@ -97,15 +97,9 @@ export default {
       title: 'Binxly.net',
 
       images: [
-        'pexels-brandon-montrone-1179229.jpg',
-        'pexels-cátia-matos-1072179.jpg',
-        'pexels-jaymantri-4827.jpg',
-        'pexels-kei-scampa-4507967.jpg',
-        'pexels-oliver-sjöström-931018.jpg',
-        'pexels-oliver-sjöström-931018 copy.jpg',
-        'pexels-oliver-sjöström-931018 copy 2.jpg',
-        'pexels-sohail-na-807598.jpg',
-        'pexels-vlad-kovriga-339119.jpg'
+        'bamboo-leaves.jpg',
+        'coast.jpg',
+        'water-droplets.jpg'
       ]
 
     }
