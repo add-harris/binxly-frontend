@@ -8,7 +8,7 @@
       color="#6A76AB"
       dark
       height="90"
-      :src="randomImage()"
+      src="water-droplets.jpg"
     >
 
       <template v-slot:img="{ props }">
@@ -17,8 +17,6 @@
           gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
         ></v-img>
       </template>
-
-<!--      <v-app-bar-nav-icon/>-->
 
       <v-toolbar-title dark v-text="title" class="app-bar-title binx-text" />
 
