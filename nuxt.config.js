@@ -21,6 +21,10 @@ export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
 
+  publicRuntimeConfig: {
+    constructorUrl: process.env.BASE_URL || 'http://localhost:8080/constructor'
+  },
+
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     titleTemplate: '%s - binxly.net',

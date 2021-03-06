@@ -6,7 +6,7 @@
 
     <v-row class="ma-6">
       <v-spacer></v-spacer>
-      <v-btn color="primary">Finalise</v-btn>
+      <v-btn color="primary" to="/finalise">Finalise</v-btn>
     </v-row>
 
     <ViewPanel :nav-bar="navBar" :components="components"></ViewPanel>
@@ -63,7 +63,8 @@ export default {
 
   },
 
-  methods: {},
+  methods: {
+  },
 
 }
 
