@@ -5,6 +5,9 @@ steps:
   - name: adamharrison/firebase-cli
     entrypoint: npm
     args: ['run', 'generate']
+    env:
+      - 'BASE_URL=$_BASE_URL'
+      - 'CONSTRUCTOR_URL=$_CONSTRUCTOR_URL'
   - name: adamharrison/firebase-cli
     args: ['deploy', '--project=$PROJECT_ID']
 

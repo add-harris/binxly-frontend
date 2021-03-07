@@ -18,7 +18,7 @@
     <v-card-actions>
       <v-btn to="/create" class="ma-6">Back</v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="primary" class="ma-6">Confirm</v-btn>
+      <v-btn color="primary" class="ma-6" @click="post()">Confirm</v-btn>
     </v-card-actions>
 
   </v-card>
@@ -39,6 +39,29 @@ export default {
     }),
 
   },
+
+  methods: {
+
+    async post() {
+      const url = this.$config.constructorUrl
+
+      const config = {
+        headers: {
+          'Access-Control-Allow-Origin': this.$config.baseUrl,
+          'Accept': 'application/json',
+        }
+      }
+
+      const data = { title: "Shama lala malu malu" }
+
+      this.$axios.$post(`${url}/build`, data, config).then(response => {
+        console.log(response)
+        console.log(response.text)
+      })
+
+    }
+
+  }
 
 }
 </script>

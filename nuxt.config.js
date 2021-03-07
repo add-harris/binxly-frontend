@@ -22,7 +22,8 @@ export default {
   target: 'static',
 
   publicRuntimeConfig: {
-    constructorUrl: process.env.BASE_URL || 'http://localhost:8080/constructor'
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+    constructorUrl: process.env.CONSTRUCTOR_URL || 'http://localhost:8080/constructor'
   },
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
