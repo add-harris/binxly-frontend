@@ -17,6 +17,22 @@ function authConfig() {
   return config
 }
 
+function firestoreConfig() {
+
+  let config = {
+    memoryOnly: false,
+    chunkName: process.env.NODE_ENV !== 'production' ? 'firebase-auth' : '[id]', // default
+    enablePersistence: false,
+  }
+
+  if (process.env.EMULATORS === 'true') {
+    config.emulatorPort = 6060
+    config.emulatorHost = 'http://localhost'
+  }
+
+  return config
+}
+
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
@@ -85,7 +101,8 @@ export default {
       measurementId: "G-QNYVKR3T6H"
     },
     services: {
-      auth: authConfig()
+      auth: authConfig(),
+      firestore: firestoreConfig()
     }
   },
 

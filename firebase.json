@@ -20,6 +20,9 @@
     "hosting": {
       "port": 5000
     },
+    "firestore": {
+      "port": 6060
+    },
     "ui": {
       "enabled": true,
       "port": 4000
