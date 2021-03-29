@@ -22,12 +22,9 @@
     <v-card-actions>
       <v-btn to="/create" class="ma-6">Back</v-btn>
       <v-spacer></v-spacer>
-<!--      <v-btn class="ma-6" @click="save()">Store</v-btn>-->
-<!--      <v-btn class="ma-6" @click="getFromDb()">Get</v-btn>-->
       <v-btn color="primary" class="ma-6" @click="post()">Post</v-btn>
     </v-card-actions>
 
-<!--    <div v-if="show">{{dbResults}}</div>-->
 
   </v-card>
 
@@ -40,10 +37,7 @@ export default {
   name: "finalise",
 
   data() {
-    return {
-      show: false,
-      dbResults: null
-    }
+    return {}
   },
 
   computed: {
@@ -53,16 +47,14 @@ export default {
       components: state => state.components.components,
     }),
 
-    // dataBase() {
-    //   return this.$fire.firestore
-    // }
-
   },
 
   methods: {
 
     async post() {
       const url = this.$config.constructorUrl
+      const id = this.randomId()
+      console.log(id)
 
       const config = {
         headers: {
@@ -72,6 +64,8 @@ export default {
       }
 
       const data = {
+        id: id,
+        projectName: "frontend-test",
         navBar:{
           title: "Shama lala malu malu"
         }
@@ -92,23 +86,9 @@ export default {
 
     },
 
-    // save() {
-    //   this.dataBase.collection("builds").add({
-    //     navBar: this.navBar,
-    //     components: this.components
-    //   })
-    //   .then((docRef) => { console.log("Document written with ID: ", docRef.id) })
-    //   .catch((error) => { console.error("Error adding document: ", error) });
-    // },
-    //
-    // getFromDb() {
-    //   this.dataBase.collection("builds").get().then((querySnapshot) => {
-    //     querySnapshot.forEach((doc) => {
-    //       console.log("Get From DB");
-    //       console.log(`${doc.id} => ${doc.data()}`);
-    //     });
-    //   });
-    // }
+    randomId() {
+      return Math.floor(Math.random() * Math.floor(99999999))
+    }
 
   }
 
