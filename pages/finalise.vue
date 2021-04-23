@@ -47,28 +47,31 @@ export default {
       components: state => state.components.components,
     }),
 
+    constructorUrl() {
+      return this.$config.constructorUrl
+    },
+
+    headers() {
+      return {
+        'Access-Control-Allow-Origin': this.$config.baseUrl,
+        'Accept': 'application/json',
+      }
+    }
+
   },
 
   methods: {
 
     async post() {
-      const url = this.$config.constructorUrl
-      const id = this.randomId()
-      console.log(id)
 
       const config = {
-        headers: {
-          'Access-Control-Allow-Origin': this.$config.baseUrl,
-          'Accept': 'application/json',
-        }
+        headers: this.headers
       }
 
       const data = {
-        id: id,
+        id: this.randomId(),
         projectName: "frontend-test",
-        navBar:{
-          title: "Shama lala malu malu"
-        }
+        navBar: this.navBar
       }
 
       // Using Firebase Auth id token as bearer token as suggested
@@ -76,7 +79,7 @@ export default {
       this.$fireModule.auth().currentUser.getIdToken().then( ID_TOKEN => {
         config.headers["Authorization"] = `Bearer ${ID_TOKEN}`
         this.$axios
-          .$post(`${url}/build`, data, config)
+          .$post(`${this.constructorUrl}/build`, data, config)
           .then(response => {
             console.log(response)
         })

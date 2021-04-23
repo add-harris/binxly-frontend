@@ -9,6 +9,8 @@
       <v-btn color="primary" to="/finalise">Finalise</v-btn>
     </v-row>
 
+    <TestBanner></TestBanner>
+
     <ViewPanel :nav-bar="navBar" :components="components"></ViewPanel>
 
   </div>
@@ -18,7 +20,8 @@
 <script>
 
 import BuildDraw from "../components/BuildDraw";
-import ViewPanel from '../components/ViewPanel';
+import ViewPanel from "../components/ViewPanel";
+import { TestBanner } from "binxly-vue-lib"
 
 import { mapState } from 'vuex'
 
@@ -29,6 +32,7 @@ export default {
   components: {
     BuildDraw,
     ViewPanel,
+    TestBanner
   },
 
   middleware: 'auth',

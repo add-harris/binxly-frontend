@@ -19,8 +19,6 @@
 
         </v-row>
 
-
-
       </v-card>
 
     </v-col>
